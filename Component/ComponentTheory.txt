@@ -1,1 +1,94 @@
+In Angular, a component is a fundamental building block of the framework that controls a section of the user interface (UI). Each component is essentially a TypeScript class that encapsulates the logic, data, and behavior of a specific part of the application. Components work together to form the overall UI of an Angular application.
 
+Structure of an Angular Component
+An Angular component typically consists of three main parts:
+
+TypeScript Class: Contains the logic and data for the component. It is decorated with the @Component decorator, which provides metadata about the component.
+HTML Template: Defines the structure and layout of the component's view.
+CSS/SCSS Styles: Handles the styling specific to the component.
+Key Features
+Decorator (@Component): The @Component decorator is used to associate metadata with the component class. It specifies properties like:
+
+selector: Defines the custom HTML tag used to embed the component.
+templateUrl or template: Points to the HTML file or inline template for the component.
+styleUrls or styles: Points to the CSS/SCSS file or inline styles for the component.
+Example:
+
+typescript
+Copy code
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-example',
+  templateUrl: './example.component.html',
+  styleUrls: ['./example.component.css']
+})
+export class ExampleComponent {
+  title = 'Hello Angular!';
+}
+Data Binding: Components support different types of data binding to connect the component's logic with its template:
+
+Interpolation ({{ expression }}): For displaying data in the template.
+Property Binding ([property]="expression"): For binding data to element properties.
+Event Binding ((event)="method()"): For responding to user interactions.
+Two-Way Binding ([(ngModel)]): Combines property and event binding for form controls.
+Lifecycle Hooks: Angular components have a set of lifecycle hooks that allow you to tap into different stages of a component's existence (e.g., initialization, changes, destruction). Examples include:
+
+ngOnInit: Called after the component's data-bound properties are initialized.
+ngOnDestroy: Called before the component is destroyed.
+Example:
+
+typescript
+Copy code
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-lifecycle',
+  template: '<h1>{{ message }}</h1>'
+})
+export class LifecycleComponent implements OnInit {
+  message = '';
+
+  ngOnInit() {
+    this.message = 'Component Initialized!';
+  }
+}
+Communication Between Components: Components can communicate with each other using:
+
+@Input(): For passing data from a parent to a child component.
+@Output(): For emitting events from a child component to a parent.
+How It Works
+Bootstrap Component: The Angular application starts with a root component, typically AppComponent. This component is bootstrapped in the main.ts file.
+
+Hierarchy: Components can be nested, forming a component tree. A parent component can pass data to child components and listen to events from them.
+
+Rendering: Angular's rendering engine takes care of updating the DOM whenever the component's data changes, using a powerful change detection mechanism.
+
+Example of a Basic Component
+Here’s a simple example:
+
+HTML Template (app.component.html)
+
+html
+Copy code
+<h1>{{ title }}</h1>
+<button (click)="changeTitle()">Change Title</button>
+Component Logic (app.component.ts)
+
+typescript
+Copy code
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Welcome to Angular';
+
+  changeTitle() {
+    this.title = 'Title Updated!';
+  }
+}
+In this example, the component renders a button and a title. Clicking the button updates the title dynamically.
